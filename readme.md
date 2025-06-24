@@ -11,7 +11,7 @@ The code in this repository helps with that: it collects on-chain information on
 
 ## Usage
 
-For analyzing the orders of eth-flow address `0x40A50cf069e992AA4536211B23F286eF88752187 on Ethereum mainnet:
+For analyzing the orders of eth-flow address `0x40A50cf069e992AA4536211B23F286eF88752187` on Ethereum mainnet:
 
 ```sh
 ./run.sh --address "0x40A50cf069e992AA4536211B23F286eF88752187" --network mainnet
