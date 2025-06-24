@@ -80,6 +80,7 @@ const events = await orderPlacementEvents({
   provider,
   ethFlowAddress,
 });
+
 const appDataFromEvents = events.map((e) => {
   if (!("args" in e)) {
     throw new Error(
@@ -145,4 +146,28 @@ for (const [appData, info] of appDataByFrequency) {
   console.log(
     `${appData}: count ${info.count}, appCode: ${appCode ?? "unknown"}`,
   );
+}
+
+console.log("List of orders by traders having an ENS primary name:");
+for (const event of events) {
+  if (!("args" in event)) {
+    throw new Error(
+      `Failed to decode event at transaction ${event.transactionHash}`,
+    );
+  }
+
+  const owner = event.args[1][2];
+  const appData = event.args[1][6];
+  const ownerPrimaryName = await provider.lookupAddress(owner);
+
+  if (ownerPrimaryName !== null) {
+    console.log(
+      "appData: ",
+      appData,
+      "tx: ",
+      event.transactionHash,
+      "ens: ",
+      ownerPrimaryName,
+    );
+  }
 }
